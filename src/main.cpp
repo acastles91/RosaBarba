@@ -6,9 +6,9 @@
 
 #define EN    23
 #define STEP1 22
-#define DIR1  32
-#define STEP2 19
-#define DIR2  18
+#define DIR1  21
+#define STEP2 32
+#define DIR2  33
 
 long range = 100000;  //why is it a long? Answer: function moveTo requires a long// Why is it called range?
 int rTime = 10;
@@ -17,7 +17,7 @@ long distance = 100000;
 int microsteps = 8;   
 
 long fullTurn = 2800;
-float floatSpeed = 4000.0;
+float floatSpeed = 3000.0;
 
 AccelStepper mA(AccelStepper::DRIVER,STEP1, DIR1);
 AccelStepper mB(AccelStepper::DRIVER,STEP2,DIR2); 
@@ -58,22 +58,22 @@ void loop() {
   //   mA.run();
   //   mB.run();
   if (mA.distanceToGo() == 0){
-    delayMicroseconds(1000000);
+    //delayMicroseconds(1000000);
     mA.setCurrentPosition(0);
     //float duration = (fullTurn * microsteps) / floatSpeed;
     //formula goal = (duration * floatSpeed) * microsteps;
-    long goalTime = (5 * floatSpeed);
+    long goalTime = (6000 * floatSpeed);
     float duration = goalTime / floatSpeed;
     mA.moveTo(goalTime);
     Serial.printf("Duration: %d \n", int(duration));
   }
   
   if (mB.distanceToGo() == 0){
-    delayMicroseconds(1000000);
+    //delayMicroseconds(1000000);
     mB.setCurrentPosition(0);
     //float duration = (fullTurn * microsteps) / floatSpeed;
     //formula goal = (duration / floatSpeed) * microsteps;
-    long goalTime = (5 * floatSpeed);
+    long goalTime = (6000 * floatSpeed);
     float duration = (goalTime) / floatSpeed;
     mB.moveTo(goalTime);
     Serial.printf("Duration: %d \n", int(duration));
