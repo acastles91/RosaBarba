@@ -1,14 +1,12 @@
-#include <Arduino.h>
 #include <AccelStepper.h>
-
 
 //Pinout
 
 #define EN    23
 #define STEP1 22
-#define DIR1  21
-#define STEP2 32
-#define DIR2  33
+#define DIR1  32
+#define STEP2 19
+#define DIR2  18
 
 long range = 100000;  //why is it a long? Answer: function moveTo requires a long// Why is it called range?
 int rTime = 10;
@@ -17,7 +15,7 @@ long distance = 100000;
 int microsteps = 8;   
 
 long fullTurn = 2800;
-float floatSpeed = 2000.0;
+float floatSpeed = 4000.0;
 
 AccelStepper mA(AccelStepper::DRIVER,STEP1, DIR1);
 AccelStepper mB(AccelStepper::DRIVER,STEP2,DIR2); 
@@ -44,20 +42,7 @@ mB.setAcceleration(floatSpeed * 4);
 
 void loop() {
 
-  // if (mA.distanceToGo() == 0){
-  //     Serial.print("A goto ");
-  //     Serial.println(-mA.currentPosition());
-  //     mA.moveTo(-mA.currentPosition());
-  //   }
-  //   if (mB.distanceToGo() == 0){
-  //     Serial.print("B goto ");
-  //     Serial.println(-mB.currentPosition());      
-  //     mB.moveTo(-mB.currentPosition());
-  //   }
-   
-  //   mA.run();
-  //   mB.run();
-  if (mA.distanceToGo() == 0){
+if (mA.distanceToGo() == 0){
     //delayMicroseconds(1000000);
     mA.setCurrentPosition(0);
     //float duration = (fullTurn * microsteps) / floatSpeed;
