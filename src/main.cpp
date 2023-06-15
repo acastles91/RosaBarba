@@ -102,9 +102,9 @@ void loop() {
 
   for (int i = 0; i < goalTime; i++){
     digitalWrite(STEP1, HIGH);
-    delayMicroseconds(300);
+    delayMicroseconds(350);
     digitalWrite(STEP1, LOW);
-    delayMicroseconds(300);
+    delayMicroseconds(350);
   }
 }
 //^
