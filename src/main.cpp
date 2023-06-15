@@ -7,26 +7,27 @@
 #define EN    23
 #define STEP1 22
 #define DIR1  21
-//#define STEP2 32
-//#define DIR2  33
+#define STEP2 32
+#define DIR2  33
+#define SPEED 350
 
-long range = 100000;  //why is it a long? Answer: function moveTo requires a long// Why is it called range?
-int rTime = 10;
-float rStart = 0.5; // why do they all begin with r?
-long distance = 100000; 
-//int microsteps = 8;   Microsteps in driver: 3200 per revolution (16)
-// steps per revolution = 200 * 15.3 * 16 = 49344
-
-long fullTurn = 49344; //Gear ratio : 15.3 : 1
-//float floatSpeed = 2000.0;
-// Speed = steps per revolution / time in seconds. One revolution per minute = steps per revolution / 60 seconds = 49344 / 60 = 822.4
-
-float floatSpeed = 3060.0;
-float speedFactor = 32000;
-
-AccelStepper mA(AccelStepper::DRIVER,STEP1, DIR1);
-//AccelStepper mB(AccelStepper::DRIVER,STEP2,DIR2); 
-
+//long range = 100000;  //why is it a long? Answer: function moveTo requires a long// Why is it called range?
+//int rTime = 10;
+//float rStart = 0.5; // why do they all begin with r?
+//long distance = 100000; 
+////int microsteps = 8;   Microsteps in driver: 3200 per revolution (16)
+//// steps per revolution = 200 * 15.3 * 16 = 49344
+//
+//long fullTurn = 49344; //Gear ratio : 15.3 : 1
+////float floatSpeed = 2000.0;
+//// Speed = steps per revolution / time in seconds. One revolution per minute = steps per revolution / 60 seconds = 49344 / 60 = 822.4
+//
+//float floatSpeed = 3060.0;
+//float speedFactor = 32000;
+//
+//AccelStepper mA(AccelStepper::DRIVER,STEP1, DIR1);
+////AccelStepper mB(AccelStepper::DRIVER,STEP2,DIR2); 
+//
 long goalTime = 1000000000L;
 
 void setup() {
@@ -34,22 +35,28 @@ void setup() {
 Serial.begin(115200);
 pinMode(EN, OUTPUT);
 pinMode(STEP1, OUTPUT);
+pinMode(STEP2, OUTPUT);
+pinMode(DIR1, OUTPUT);
+pinMode(DIR2, OUTPUT);
 digitalWrite(EN, LOW);
 digitalWrite(DIR1, HIGH);
+digitalWrite(DIR2, HIGH);
+
+
 
 // first setting
-mA.setMaxSpeed(floatSpeed * speedFactor);
-mA.setAcceleration(100000);
-mA.setSpeed(floatSpeed * speedFactor);
-
-//mB.setMaxSpeed(floatSpeed);
-//mB.setAcceleration(floatSpeed * 4);
-//mB.setSpeed(SPEED);
-
-//mA.moveTo(range*2);
-//mB.moveTo(range*3);
-mA.moveTo(goalTime);
-
+//mA.setMaxSpeed(floatSpeed * speedFactor);
+//mA.setAcceleration(100000);
+//mA.setSpeed(floatSpeed * speedFactor);
+//
+////mB.setMaxSpeed(floatSpeed);
+////mB.setAcceleration(floatSpeed * 4);
+////mB.setSpeed(SPEED);
+//
+////mA.moveTo(range*2);
+////mB.moveTo(range*3);
+//mA.moveTo(goalTime);
+//
 
 }
 
@@ -102,9 +109,11 @@ void loop() {
 
   for (int i = 0; i < goalTime; i++){
     digitalWrite(STEP1, HIGH);
-    delayMicroseconds(350);
+    digitalWrite(STEP2, HIGH);
+    delayMicroseconds(SPEED);
     digitalWrite(STEP1, LOW);
-    delayMicroseconds(350);
+    digitalWrite(STEP2, LOW);
+    delayMicroseconds(SPEED);
   }
 }
 //^
