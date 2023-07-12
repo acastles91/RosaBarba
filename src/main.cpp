@@ -7,8 +7,8 @@
 #define EN    23
 #define STEP1 22
 #define DIR1  21
-//#define STEP2 32
-//#define DIR2  33
+#define STEP2 32
+#define DIR2  33
 
 long range = 100000;  //why is it a long? Answer: function moveTo requires a long// Why is it called range?
 int rTime = 10;
@@ -33,9 +33,15 @@ void setup() {
 
 Serial.begin(115200);
 pinMode(EN, OUTPUT);
+pinMode(DIR1, OUTPUT);
+pinMode(DIR2, OUTPUT);
+
 pinMode(STEP1, OUTPUT);
 digitalWrite(EN, LOW);
 digitalWrite(DIR1, HIGH);
+
+pinMode(STEP2, OUTPUT);
+digitalWrite(DIR2, HIGH);
 
 // first setting
 mA.setMaxSpeed(floatSpeed * speedFactor);
@@ -48,7 +54,7 @@ mA.setSpeed(floatSpeed * speedFactor);
 
 //mA.moveTo(range*2);
 //mB.moveTo(range*3);
-mA.moveTo(goalTime);
+//mA.moveTo(goalTime);
 
 
 }
@@ -98,14 +104,12 @@ mA.moveTo(goalTime);
 
 void loop() {
 
-  
-
-  for (int i = 0; i < goalTime; i++){
     digitalWrite(STEP1, HIGH);
+    digitalWrite(STEP2, HIGH);
     delayMicroseconds(300);
     digitalWrite(STEP1, LOW);
+    digitalWrite(STEP2, LOW);
     delayMicroseconds(300);
-  }
 }
 //^
 //  if (mA.distanceToGo() == 0){
