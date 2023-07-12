@@ -106,10 +106,10 @@ void loop() {
 
     digitalWrite(STEP1, HIGH);
     digitalWrite(STEP2, HIGH);
-    delayMicroseconds(300);
+    delayMicroseconds(375);
     digitalWrite(STEP1, LOW);
     digitalWrite(STEP2, LOW);
-    delayMicroseconds(300);
+    delayMicroseconds(375);
 }
 //^
 //  if (mA.distanceToGo() == 0){
