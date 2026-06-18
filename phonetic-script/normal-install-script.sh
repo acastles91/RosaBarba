@@ -3,7 +3,8 @@
 sudo timedatectl set-timezone Europe/Berlin
 sudo apt update
 sudo apt install neovim python3-websocket python3-requests
-cp startup-script-master.sh ~
+sudo chmod +x startup-script.sh
+cp startup-script.sh ~
 cp loop.gcode ~/printer_data/gcodes
 cp service* ~/
 cp curl_log.txt ~/
