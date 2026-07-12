@@ -1,0 +1,15 @@
+[Unit]
+Description=Start 3D Printing Service
+Wants=moonraker.service
+After=moonraker.service klipper.service klipper-mcu.service KlipperScreen.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/biqu/startup-script.sh
+TimeoutStartSec=0
+StandardOutput=append:/home/biqu/service-output.log
+StandardError=append:/home/biqu/service-error.log
+
+[Install]
+WantedBy=multi-user.target
+
