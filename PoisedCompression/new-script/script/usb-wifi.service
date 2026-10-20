@@ -1,0 +1,9 @@
+[Unit]
+Description=USB stick Wifi script
+
+[Service]
+ExecStart=/home/biqu/wifi-script.sh
+
+[Install]
+WantedBy=multi-user.target
+

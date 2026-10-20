@@ -1,0 +1,1 @@
+@reboot ~/run_temperature_script.sh
