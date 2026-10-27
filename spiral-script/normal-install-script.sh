@@ -30,5 +30,4 @@ crontab crontab_usb
 sudo mkdir /mnt/usb
 sudo mount /dev/sda1 /mnt/usb
 sudo cp wifi.txt /mnt/usb/
-
-
+sudo cp wifi_connection_log.txt /mnt/usb/
